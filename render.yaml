@@ -1,17 +1,18 @@
 services:
   - type: web
     name: hr-backend
-    env: python
+    runtime: python
+    plan: free
+    rootDir: .
     buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn app:app
-    autoDeploy: true
+    startCommand: gunicorn app:app --workers 1 --threads 4 --timeout 120
     healthCheckPath: /healthz
     envVars:
       - key: PYTHON_VERSION
         value: 3.12.7
-      - key: FRONTEND_ORIGINS
-        sync: false
-      - key: PUBLIC_API_BASE_URL
-        sync: false
-      - key: GOOGLE_SHEET_URL
-        sync: false
+      - key: CACHE_TTL_SECONDS
+        value: 300
+      - key: STALE_CACHE_MAX_AGE_SECONDS
+        value: 86400
+      - key: SHEET_TIMEOUT_SECONDS
+        value: 15
