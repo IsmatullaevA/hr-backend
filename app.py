@@ -81,7 +81,13 @@ PHOTO_FILES = {
     'Бабаева Муборак': 'муборак.png',
     'Гулямова Сабина': 'сабина.png',
 }
+NETLIFY_ASSET_BASE = 'https://hr-methodology-analytics.netlify.app/img'
 
+def photo_url_for(name):
+    filename = PHOTO_FILES.get(name)
+    if filename:
+        return f"{NETLIFY_ASSET_BASE}/{quote(filename)}"
+    return f"https://ui-avatars.com/api/?name={quote(name.replace(' ', '+'))}&background=random"
     
 _cache_lock = Lock()
 _cache_state = {
