@@ -178,7 +178,7 @@ def cache_is_usable(loaded_at: float) -> bool:
 def fetch_sheet_text() -> str:
     response = HTTP.get(GOOGLE_SHEET_URL, timeout=SHEET_TIMEOUT_SECONDS)
     response.raise_for_status()
-    return response.text
+    return response.content.decode('utf-8-sig')
 
 
 
