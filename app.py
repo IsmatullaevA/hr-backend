@@ -143,13 +143,6 @@ def public_base_url():
     return request.host_url.rstrip('/')
 
 
-def photo_url_for(name):
-    filename = PHOTO_FILES.get(name)
-    if filename and (IMG_DIR / filename).exists():
-        return f"{public_base_url()}/img/{quote(filename)}"
-    return f"https://ui-avatars.com/api/?name={quote(name.replace(' ', '+'))}&background=random"
-
-
 def write_cache_file(payload):
     try:
         CACHE_FILE.write_text(
