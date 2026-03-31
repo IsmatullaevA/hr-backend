@@ -82,11 +82,6 @@ PHOTO_FILES = {
     'Гулямова Сабина': 'сабина.png',
 }
 
-def photo_url_for(name):
-    filename = PHOTO_FILES.get(name)
-    if filename:
-        return f"{NETLIFY_ASSET_BASE}/{quote(filename)}"
-    return f"https://ui-avatars.com/api/?name={quote(name.replace(' ', '+'))}&background=random"
     
 _cache_lock = Lock()
 _cache_state = {
