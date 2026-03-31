@@ -17,7 +17,7 @@ from urllib3.util.retry import Retry
 
 BASE_DIR = Path(__file__).resolve().parent
 IMG_DIR = BASE_DIR / 'static' / 'img'
-CACHE_FILE = BASE_DIR / 
+CACHE_FILE = BASE_DIR / 'trainers_cache.json'
 
 app = Flask(__name__)
 app.logger.setLevel(logging.INFO)
@@ -74,14 +74,20 @@ COMMENT_LABELS = {
 }
 
 PHOTO_FILES = {
-    'Темиров Жалолиддин': 'Жалолиддин.png',
-    'Рустамов Сардор': 'Сардор.png',
-    'Рахманкулова Шахнозабону': 'Шахноза.png',
-    'Халимбоев Бехруз': 'Бехруз.png',
-    'Бабаева Муборак': 'Муборак.png',
-    'Гулямова Сабина': 'Сабина.png',
+    'Темиров Жалолиддин': 'жалолиддин.png',
+    'Рустамов Сардор': 'сардор.png',
+    'Рахманкулова Шахнозабону': 'шахноза.png',
+    'Халимбоев Бехруз': 'бехруз.png',
+    'Бабаева Муборак': 'муборак.png',
+    'Гулямова Сабина': 'сабина.png',
 }
 
+def photo_url_for(name):
+    filename = PHOTO_FILES.get(name)
+    if filename:
+        return f"{NETLIFY_ASSET_BASE}/{quote(filename)}"
+    return f"https://ui-avatars.com/api/?name={quote(name.replace(' ', '+'))}&background=random"
+    
 _cache_lock = Lock()
 _cache_state = {
     'loaded_at': 0.0,
