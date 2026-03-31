@@ -17,7 +17,7 @@ from urllib3.util.retry import Retry
 
 BASE_DIR = Path(__file__).resolve().parent
 IMG_DIR = BASE_DIR / 'static' / 'img'
-CACHE_FILE = BASE_DIR / 'trainers_cache.json'
+CACHE_FILE = BASE_DIR / 
 
 app = Flask(__name__)
 app.logger.setLevel(logging.INFO)
